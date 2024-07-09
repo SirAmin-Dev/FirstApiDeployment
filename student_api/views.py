@@ -3,10 +3,12 @@ from rest_framework.views import APIView
 from .serializers import StudentSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import permissions
 from .models import Student
 # Create your views here.
 
 class StudentListEndPoint(APIView):
+    permission_classes = [permissions.AllowAny]
     def get(self, request):
         students=Student.objects.all()
         serializer=StudentSerializer(students, many=True)
